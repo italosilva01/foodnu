@@ -4,7 +4,7 @@ import { Dish } from "./types/types";
 const dishes: Dish[] = [
   {
     id: "1",
-    name: "Pizza",
+    name: "Smashed Avo",
     description: "Deliciosa pizza com queijo e presunto",
     price: 29.90,
     image: "/foods/foodTest.svg",
