@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Mulish } from "next/font/google";
 import "./globals.css";
+import { MenuSideBar } from "@molecules/Menu";
 
 const mulish = Mulish({
   variable: "--font-mulish",
@@ -24,7 +25,12 @@ export default function RootLayout({
       <body
         className={`${mulish.variable} font-mulish antialiased`}
       >
-        {children}
+        <div className="flex border mx-auto w-[1440px]  justify-center gap-14">
+          <MenuSideBar />
+          <main>
+            {children}
+          </main>
+        </div>
       </body>
     </html>
   );

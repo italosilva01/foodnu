@@ -25,7 +25,7 @@ const CardRoot = ({ children, className }: CardRootProps) => {
 
 const CardImage = ({ image, className }: CardImageProps) => {
     return (
-        <Image src={image} alt="Card Image" className={`min-w-[224px] min-h-[275px] w-full h-full object-cover ${className}`} width={224} height={275} />
+        <Image src={image} alt="Card Image" className={`min-w-[224px] min-h-[275px] w-full h-full object-cover !rounded-none ${className}`} width={224} height={275} />
     )
 }
 
