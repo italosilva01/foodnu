@@ -1,13 +1,13 @@
 'use client'
 
-import { createContext, useState, ReactNode, use, useEffect } from 'react';
-import { Dish } from '@/app/types/types';
-import { getAllFoods, getFilteredFoods } from '@services/api';
+import { createContext, useState, ReactNode, use } from 'react';
+import { getAllFoods, getFilteredFoods, PaginatedResponse, Food } from '@services/api';
+import { LIMIT_PER_PAGE } from '../utils/constants/constants';
 
 interface FilterContextType {
     filters: string[];
     setFilters: (filters: string[]) => void;
-    filteredDishes: Promise<Dish[]>;
+    filteredDishes: Promise<PaginatedResponse<Food>>;
     isLoading: boolean;
 }
 
@@ -15,7 +15,8 @@ const FilterContext = createContext<FilterContextType | undefined>(undefined);
 
 export const FilterProvider = ({ children }: { children: ReactNode }) => {
     const [filters, setFiltersState] = useState<string[]>([]);
-    const [filteredDishes, setFilteredDishes] = useState<Promise<Dish[]>>(getAllFoods());
+    const initialDishes = getAllFoods();
+    const [filteredDishes, setFilteredDishes] = useState<Promise<PaginatedResponse<Food>>>(initialDishes);
     const [isLoading, setIsLoading] = useState(false);
 
     const setFilters = async (newFilters: string[]) => {
@@ -24,9 +25,9 @@ export const FilterProvider = ({ children }: { children: ReactNode }) => {
 
         try {
             if (newFilters.length === 0) {
-                setFilteredDishes(getAllFoods());
+                setFilteredDishes(initialDishes);
             } else {
-                setFilteredDishes(getFilteredFoods(newFilters));
+                setFilteredDishes(getFilteredFoods(newFilters, 1, LIMIT_PER_PAGE));
             }
         } catch (error) {
             console.error('Erro ao filtrar pratos:', error);

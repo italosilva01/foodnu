@@ -1,4 +1,5 @@
 import foodsData from '../mocks/foods';
+import { LIMIT_PER_PAGE } from '../utils/constants/constants';
 
 export interface Food {
   id: string;
@@ -10,8 +11,16 @@ export interface Food {
   tags: string[];
 }
 
-export interface ApiResponse<T> {
-  data: T;
+export interface PaginatedResponse<T> {
+  data: T[];
+  pagination: {
+    currentPage: number;
+    totalPages: number;
+    totalItems: number;
+    itemsPerPage: number;
+    hasNextPage: boolean;
+    hasPreviousPage: boolean;
+  };
   message: string;
   success: boolean;
 }
@@ -22,22 +31,80 @@ export interface ApiError {
   code?: number;
 }
 
-const fakeDelay = () =>{
+const fakeDelay = () => {
   const delay = Math.random() * 1000 + 2000;
   return new Promise(resolve => setTimeout(resolve, delay));
-} 
+}
 
-export const getAllFoods = async (): Promise<Food[]> => {
+export const getAllFoods = async (
+  limit: number = LIMIT_PER_PAGE,
+  page: number = 1
+): Promise<PaginatedResponse<Food>> => {
   await fakeDelay();
-  return foodsData;
+  
+  const startIndex = (page - 1) * limit;
+  const endIndex = startIndex + limit;
+  
+  const allFoods = foodsData;
+  const paginatedFoods = allFoods.slice(startIndex, endIndex);
+  
+  const totalItems = allFoods.length;
+  const totalPages = Math.ceil(totalItems / limit);
+  
+  return {
+    data: paginatedFoods,
+    pagination: {
+      currentPage: page,
+      totalPages,
+      totalItems,
+      itemsPerPage: limit,
+      hasNextPage: page < totalPages,
+      hasPreviousPage: page > 1,
+    },
+    message: `Retornando ${paginatedFoods.length} de ${totalItems} comidas`,
+    success: true
+  };
 };
 
 export const getFoodById = (id: string): Food | undefined => {
   return foodsData.find(food => food.id === id);
 };
 
-export const getFilteredFoods = async (filters: string[]): Promise<Food[]> => {
-  const foods = await getAllFoods();
-  return foods.filter(food => filters.every(filter => food.tags.includes(filter)));
+export const getLimitedFoods = async (limit: number = 6): Promise<Food[]> => {
+  await fakeDelay();
+  return foodsData.slice(0, limit);
+};
+
+export const getFilteredFoods = async (
+  filters: string[],
+  page: number = 1,
+  limit: number = LIMIT_PER_PAGE
+): Promise<PaginatedResponse<Food>> => {
+  await fakeDelay();
+  
+  const filteredFoods = foodsData.filter(food => 
+    filters.every(filter => food.tags.includes(filter))
+  );
+  
+  const startIndex = (page - 1) * limit;
+  const endIndex = startIndex + limit;
+  const paginatedFoods = filteredFoods.slice(startIndex, endIndex);
+  
+  const totalItems = filteredFoods.length;
+  const totalPages = Math.ceil(totalItems / limit);
+  
+  return {
+    data: paginatedFoods,
+    pagination: {
+      currentPage: page,
+      totalPages,
+      totalItems,
+      itemsPerPage: limit,
+      hasNextPage: page < totalPages,
+      hasPreviousPage: page > 1,
+    },
+    message: `Retornando ${paginatedFoods.length} comidas filtradas de ${totalItems} total`,
+    success: true
+  };
 };
 
