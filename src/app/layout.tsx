@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Mulish } from "next/font/google";
 import "./globals.css";
-import { MenuSideBar } from "@molecules/Menu";
 import { FilterProvider } from "./context/FilterContext";
 
 const mulish = Mulish({

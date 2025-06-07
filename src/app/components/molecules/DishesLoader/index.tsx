@@ -26,10 +26,6 @@ export const DishesLoader = () => {
         }
     };
 
-    useEffect(() => {
-        console.log("dishes", dishes)
-        console.log("hasMore", hasMore)
-    }, [dishes])
 
     useEffect(() => {
         setDishes(response.data);
