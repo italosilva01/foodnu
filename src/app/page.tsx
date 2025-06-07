@@ -1,22 +1,17 @@
-import { DishCardGrid } from "@organisms/DishCardGrid";
-import { getAllFoods } from "@services/api";
 import { Filter } from "@molecules/Filter";
 import { Suspense } from "react";
-import { Dish } from "@/app/types/types";
+import { DishesLoader } from "./components/molecules/DishesLoader";
 
-async function DishesLoader() {
-  const promisseDishes = getAllFoods() as Promise<Dish[]>;
-  return <DishCardGrid promisseDishes={promisseDishes} />;
-}
-export default async function Home() {
+
+export default function Home() {
   return (
-    <main>
-      <div className="flex gap-4 border !w-full border-red-400"  >
+    <div className="flex flex-col w-full !mx-auto ">
+      <div className="flex gap-4 !w-full m-4 lg:ml-0"  >
         <Filter />
       </div>
-      <Suspense fallback={<div className="flex justify-center items-center size-full lg:max-w-[1095px] lg:w-[944px] lg:h-[44.875rem]">Loading...</div>}>
+      <Suspense fallback={<div className="flex justify-center items-center !size-full">Loading...</div>}>
         <DishesLoader />
       </Suspense>
-    </main>
+    </div>
   );
 }
