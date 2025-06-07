@@ -3,6 +3,8 @@ import Image from "next/image";
 interface CardRootProps {
     children: React.ReactNode;
     className?: string;
+    onClick: () => void;
+
 }
 
 interface CardImageProps {
@@ -15,9 +17,14 @@ interface CardTitleProps {
     className?: string;
 }
 
-const CardRoot = ({ children, className }: CardRootProps) => {
+interface CardContentProps extends Omit<CardRootProps, "onClick"> {
+    className?: string;
+}
+
+
+const CardRoot = ({ children, className, onClick }: CardRootProps) => {
     return (
-        <div className={`bg-white rounded-lg overflow-hidden cursor-pointer w-fit h-fit hover:shadow-md transition-shadow duration-300 ${className}`}>
+        <div className={`bg-white rounded-lg overflow-hidden cursor-pointer w-fit h-fit hover:shadow-md transition-shadow duration-300 ${className}`} onClick={onClick}>
             {children}
         </div>
     )
@@ -29,7 +36,7 @@ const CardImage = ({ image, className }: CardImageProps) => {
     )
 }
 
-const CardContent = ({ children, className }: CardRootProps) => {
+const CardContent = ({ children, className }: CardContentProps) => {
     return (
         <div className={`${className}`}>{children}</div>
     )

@@ -10,9 +10,13 @@ interface DishCardProps {
 
 }
 
-export const DishCard = ({ image, title }: DishCardProps) => {
+export const DishCard = ({ image, title, }: DishCardProps) => {
+
+    const handleClick = () => {
+        console.log("teste")
+    }
     return (
-        <Card.Root>
+        <Card.Root onClick={handleClick}>
             <Card.Content>
                 <div className="relative h-fit border-1 border-rose-50">
                     <Card.Image image={image} />

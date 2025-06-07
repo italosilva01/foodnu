@@ -25,8 +25,10 @@ export default function RootLayout({
       <body
         className={`${mulish.variable} font-mulish antialiased`}
       >
-        <div className="flex border mx-auto w-[1440px]  justify-center gap-14">
-          <MenuSideBar />
+        <div className="flex lg:w-[1440px] justify-center gap-14 ">
+          <div className="hidden lg:block">
+            <MenuSideBar />
+          </div>
           <main>
             {children}
           </main>

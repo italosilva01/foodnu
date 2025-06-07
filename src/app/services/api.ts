@@ -22,12 +22,22 @@ export interface ApiError {
   code?: number;
 }
 
+const fakeDelay = () =>{
+  const delay = Math.random() * 1000 + 2000;
+  return new Promise(resolve => setTimeout(resolve, delay));
+} 
 
-export const getAllFoods = (): Food[] => {
+export const getAllFoods = async (): Promise<Food[]> => {
+  await fakeDelay();
   return foodsData;
 };
 
 export const getFoodById = (id: string): Food | undefined => {
   return foodsData.find(food => food.id === id);
+};
+
+export const getFilteredFoods = async (filters: string[]): Promise<Food[]> => {
+  const foods = await getAllFoods();
+  return foods.filter(food => filters.every(filter => food.tags.includes(filter)));
 };
 
