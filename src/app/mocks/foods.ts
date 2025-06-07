@@ -50,7 +50,7 @@ export default [
     "name": "Breakkie Roll",
     "description": "Pão de brioche macio recheado com ovo frito perfeito, bacon crocante (opcional) e um molho especial da casa. Energia para o seu dia.",
     "price": 24.00,
-    "image": "/foods/breakkieRollEgg.svg",
+    "image": "/foods/breakkieRollMushroom.svg",
     "category": "sandwiches",
     "tags": ["bread", "egg", "bacon", "breakfast", "sandwich"]
   },

@@ -28,9 +28,7 @@ export default function RootLayout({
       >
         <FilterProvider>
           <div className="flex flex-col lg:flex-row 2xl:max-w-[1980px] mx-auto">
-            <div className="hidden lg:block">
-              <MenuSideBar />
-            </div>
+
             <main className="mx-auto flex justify-center size-full items-center lg:max-w-[1095px]">
               {children}
             </main>
