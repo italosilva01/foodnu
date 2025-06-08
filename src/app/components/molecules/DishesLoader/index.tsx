@@ -12,6 +12,11 @@ export const DishesLoader = () => {
     const response = use(filteredDishes);
     const [dishes, setDishes] = useState(response.data)
 
+    const resetInitialState = () => {
+        setPage(1);
+        setHasMore(true);
+    }
+
     const handleLoadMore = async () => {
         setIsLoading(true);
         try {
@@ -19,20 +24,24 @@ export const DishesLoader = () => {
             const response = await getFilteredFoods(filters, nextPage);
             setDishes((oldState) => [...oldState, ...response.data])
             setPage(nextPage);
-            setHasMore(dishes.length > response.pagination.totalItems);
+            setHasMore(!((dishes.length + response.data.length) >= response.pagination.totalItems));
 
         } finally {
             setIsLoading(false);
         }
     };
 
-
     useEffect(() => {
+        setPage(1);
         setDishes(response.data);
+
     }, [response]);
 
-    return <div className="flex flex-col w-full !mx-auto ">
+    useEffect(() => {
+        resetInitialState();
+    }, [filteredDishes])
 
+    return <div className="flex flex-col w-full !mx-auto ">
         <DishCardGrid dishes={dishes} onLoadMore={handleLoadMore} isLoading={isLoading} hasMore={hasMore} />
     </div>
 }
