@@ -48,7 +48,7 @@ const FilterBody = () => {
             <div className="grid grid-cols-2 gap-4">
                 <div className="">
                     <h2 className="text-lg font-bold !mb-3">Tags</h2>
-                    <div className="flex flex-col gap-2 h-96 overflow-y-auto">
+                    <div className="flex flex-col gap-2 overflow-y-auto h-56">
                         {TAG_FILTERS_OPTIONS.map((item, index) => (
                             <CheckboxOption key={index} register={register} item={item} />
                         ))}
@@ -56,9 +56,12 @@ const FilterBody = () => {
                 </div>
                 <div>
                     <h2 className="text-lg font-bold !mb-3">Categorias</h2>
-                    {CATEGORY_FILTERS_OPTIONS.map((item, index) => (
-                        <CheckboxOption key={index} register={register} item={item} />
-                    ))}
+                    <div className="overflow-y-auto lg:h-56">
+
+                        {CATEGORY_FILTERS_OPTIONS.map((item, index) => (
+                            <CheckboxOption key={index} register={register} item={item} />
+                        ))}
+                    </div>
                 </div>
             </div>
             <Button type="submit" className="w-full mt-4">Aplicar</Button>
