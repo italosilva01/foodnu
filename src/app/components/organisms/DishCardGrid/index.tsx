@@ -38,7 +38,18 @@ export const DishCardGrid: React.FC<DishCardGridProps> = ({ dishes,
                     const firstTag = tags[0];
                     const firstCategory = category
                     return (
-                        <DishCard key={id} image={image} title={name} price={price} tag={firstTag} category={firstCategory} />
+                        <DishCard
+                            key={id}
+                            id={id}
+                            dataDish={{
+                                image,
+                                title: name,
+                                price,
+                                tag: firstTag,
+                                category: firstCategory
+                            }}
+
+                        />
                     )
                 })}
             </div>
