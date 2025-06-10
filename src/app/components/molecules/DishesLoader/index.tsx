@@ -1,7 +1,7 @@
 "use client"
-import { useFilter } from "@/app/context/FilterContext";
-import { DishCardGrid } from "../../organisms/DishCardGrid";
 import { use, useEffect, useState } from "react";
+import { useFilter } from "@/app/context/FilterContext";
+import { DishCardGrid } from "@organisms/DishCardGrid";
 import { getFilteredFoods } from "@/app/services/api";
 
 export const DishesLoader = () => {
