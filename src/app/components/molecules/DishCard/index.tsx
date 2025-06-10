@@ -1,22 +1,30 @@
 'use client';
 
 import { Card } from "@/app/components/atoms/Card";
+import { formatCurrency } from "@/app/utils/functions";
 import { Category } from "@atoms/Category";
 import { Tag } from "@atoms/Tag";
+import { useRouter } from "next/navigation";
 
 interface DishCardProps {
-    image: string;
-    title: string;
-    price: number;
-    tag: string;
-    category: string;
+
+    id: string
+    dataDish: {
+        image: string;
+        title: string;
+        price: number;
+        tag: string;
+        category: string;
+    }
 
 }
 
-export const DishCard = ({ image, title, price, tag, category }: DishCardProps) => {
+export const DishCard = ({ dataDish, id }: DishCardProps) => {
+    const router = useRouter()
+    const { image, title, price, tag, category } = dataDish;
 
     const handleClick = () => {
-        console.log("teste")
+        router.push(`dishes/${id}`)
     }
 
     return (
@@ -31,10 +39,7 @@ export const DishCard = ({ image, title, price, tag, category }: DishCardProps) 
                 </div>
                 <Card.Title title={title} className="text-center mt-2 max-h-[1.75rem] truncate" />
                 <p className="text-center text-sm text-gray-500">
-                    {new Intl.NumberFormat('pt-BR', {
-                        style: 'currency',
-                        currency: 'BRL'
-                    }).format(price)}
+                    {formatCurrency(price)}
                 </p>
             </Card.Content>
         </Card.Root>
