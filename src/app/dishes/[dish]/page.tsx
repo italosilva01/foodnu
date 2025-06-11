@@ -1,29 +1,39 @@
-import { Suspense, use } from "react"
+import { Suspense } from "react"
 import { getFoodById } from "@/app/services/api"
 import { DishDetails } from "@/app/components/molecules/DishDetails"
+import { SkeletonDishDetail } from "@/app/components/atoms/Skeletons/SkeletonDishDetail"
+import { SimilarDishes } from "@/app/components/molecules/SimilarDishes"
 
 interface DishProps {
-    params: {
+    params: Promise<{
         dish: string
-    }
+    }>
 }
 
-export default function DishPage({ params }: DishProps) {
-    const selectedDish = use(Promise.resolve(getFoodById(params.dish)))
-
+export default async function DishPage({ params }: DishProps) {
+    const resolvedParams = await params;
+    console.log("params", resolvedParams)
+    const selectedDish = await getFoodById(resolvedParams.dish)
+    console.log("selectedDish", selectedDish)
     return (
-        <Suspense fallback={
-            <div className="size-full flex flex-col md:flex-row md:gap-5 p-3 bg-cream mt-4 animate-pulse">
-                <div className="w-[400px] h-[200px] bg-gray-800 rounded-md mx-auto" />
-                <div className="p-2 pl-0 flex flex-col items-start mt-4 gap-3 w-full">
-                    <div className="h-8 bg-gray-800 w-1/3 rounded-md" />
-                    <div className="h-20 bg-gray-800 w-full rounded-md" />
-                    <div className="h-6 bg-gray-800 w-1/4 rounded-md" />
-                    <div className="h-10 bg-gray-800 w-40 rounded-md ml-auto" />
+        <div className="flex flex-col gap-2 w-full">
+            <Suspense fallback={
+                <SkeletonDishDetail />
+            } >
+                <DishDetails dish={selectedDish} />
+            </Suspense>
+            <Suspense fallback={
+                <div className="!h-[100px]  bg-gray-200 rounded-md animate-pulse flex flex-col ">
+                    <div className="!h-10 bg-gray-400 w-[210px] mt-5 ml-3 rounded-md">
+                    </div>
+                    <div>
+                        <div className="h-[60px]" />
+                    </div>
+
                 </div>
-            </div>
-        }>
-            <DishDetails dish={selectedDish} />
-        </Suspense>
+            }>
+                <SimilarDishes dish={selectedDish} />
+            </Suspense>
+        </div >
     )
 }

@@ -108,3 +108,34 @@ export const getFilteredFoods = async (
   };
 };
 
+export const getFilteredByCategoryFoods = async (
+  filters: string[],
+  page: number = 1,
+  limit: number = LIMIT_PER_PAGE
+): Promise<PaginatedResponse<Food>> => {
+  await fakeDelay();
+  const filteredFoods = foodsData.filter(food => 
+    filters.every(filter => food.category.includes(filter))
+  );
+  
+  const startIndex = (page - 1) * limit;
+  const endIndex = startIndex + limit;
+  const paginatedFoods = filteredFoods.slice(startIndex, endIndex);
+  
+  const totalItems = filteredFoods.length;
+  const totalPages = Math.ceil(totalItems / limit);
+  
+  return {
+    data: paginatedFoods,
+    pagination: {
+      currentPage: page,
+      totalPages,
+      totalItems,
+      itemsPerPage: limit,
+      hasNextPage: page < totalPages,
+      hasPreviousPage: page > 1,
+    },
+    message: `Retornando ${paginatedFoods.length} comidas filtradas de ${totalItems} total`,
+    success: true
+  };
+};

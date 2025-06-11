@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image, { ImageProps } from "next/image";
 
 interface CardRootProps {
     children: React.ReactNode;
@@ -7,7 +7,7 @@ interface CardRootProps {
 
 }
 
-interface CardImageProps {
+interface CardImageProps extends Omit<ImageProps, 'src' | 'alt'> {
     image: string;
     className?: string;
 }
@@ -30,9 +30,16 @@ const CardRoot = ({ children, className, onClick }: CardRootProps) => {
     )
 }
 
-const CardImage = ({ image, className }: CardImageProps) => {
+const CardImage = ({ image, className, width = 224, height = 275, ...props }: CardImageProps) => {
     return (
-        <Image src={image} alt="Card Image" className={`min-w-[224px] min-h-[275px] w-full h-full object-cover !rounded-none ${className}`} width={224} height={275} />
+        <Image
+            src={image}
+            alt="Card Image"
+            className={`min-w-[224px] min-h-[275px] w-full h-full object-cover !rounded-none ${className}`}
+            width={width}
+            height={height}
+            {...props}
+        />
     )
 }
 
