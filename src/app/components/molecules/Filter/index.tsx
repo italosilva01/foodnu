@@ -22,7 +22,7 @@ const FilterBody = () => {
         filters.forEach(filter => {
             setValue(filter, true);
         });
-    }, [filters]);
+    }, [filters, setValue]);
 
     const onSubmit = async (data: FilterFormData) => {
         const payload = Object.keys(data).filter(key => data[key] !== false);

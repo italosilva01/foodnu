@@ -7,7 +7,7 @@ interface AddToCartButtonProps {
     className?: string
 }
 
-export const AddToCartButton = ({ dishId, className = '' }: AddToCartButtonProps) => {
+export const AddToCartButton = ({ className = '' }: AddToCartButtonProps) => {
     const handleAddToCart = () => {
         console.log('testestest')
     }
