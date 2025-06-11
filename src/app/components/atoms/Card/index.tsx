@@ -35,7 +35,7 @@ const CardImage = ({ image, className, width = 224, height = 275, ...props }: Ca
         <Image
             src={image}
             alt="Card Image"
-            className={`min-w-[224px] min-h-[275px] w-full h-full object-cover !rounded-none ${className}`}
+            className={`object-cover rounded-none ${className}`}
             width={width}
             height={height}
             {...props}

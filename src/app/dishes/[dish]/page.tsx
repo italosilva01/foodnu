@@ -21,19 +21,9 @@ export default async function DishPage({ params }: DishProps) {
                 <SkeletonDishDetail />
             } >
                 <DishDetails dish={selectedDish} />
-            </Suspense>
-            <Suspense fallback={
-                <div className="!h-[100px]  bg-gray-200 rounded-md animate-pulse flex flex-col ">
-                    <div className="!h-10 bg-gray-400 w-[210px] mt-5 ml-3 rounded-md">
-                    </div>
-                    <div>
-                        <div className="h-[60px]" />
-                    </div>
 
-                </div>
-            }>
-                <SimilarDishes dish={selectedDish} />
             </Suspense>
+
         </div >
     )
 }

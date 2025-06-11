@@ -5,6 +5,7 @@ import { AddToCartButton } from "@/app/components/atoms/ButtonAddToCartButton"
 import { Food } from "@/app/services/api"
 import { motion } from "motion/react"
 import { useMobile } from "@/app/hoocks/useMobile"
+import { SimilarDishes } from "@molecules/SimilarDishes"
 
 interface DishDetailsProps {
     dish: Food | undefined,
@@ -21,7 +22,7 @@ export const DishDetails = ({ dish }: DishDetailsProps) => {
         height: 400
     };
 
-    return (<div>
+    return (<div className="gap-3">
         <motion.div className="size-full flex flex-col md:flex-row md:gap-5 p-3 bg-cream mt-4" initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}>
             <Image src={dish?.image || ''} {...sizeImage} alt="image of dish" priority className="mx-auto" />
@@ -39,8 +40,11 @@ export const DishDetails = ({ dish }: DishDetailsProps) => {
                 <AddToCartButton dishId={dish?.id || ''} className="mt-auto" />
             </div>
         </motion.div>
+        <motion.div initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}>
+            <SimilarDishes dish={dish} />
+        </motion.div>
 
     </div>
-
     )
 }
