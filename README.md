@@ -19,7 +19,7 @@ bun dev
 ![home](https://github.com/italosilva01/foodnu/blob/main/public/home.png)
 
 ### Details Screen
-![detail](https://github.com/italosilva01/foodnu/blob/main/public/details.png)
+![detail](https://github.com/italosilva01/foodnu/blob/develop-2/public/details.png)
 
 Mobile version available
 
