@@ -16,7 +16,12 @@ bun dev
 ```
 ## Images
 ### Home Screen
-![login](https://github.com/italosilva01/foodnu/blob/main/public/home.png)
+![home](https://github.com/italosilva01/foodnu/blob/main/public/home.png)
+
+### Details Screen
+![detail](https://github.com/italosilva01/foodnu/blob/main/public/details.png)
+
+Mobile version available
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
