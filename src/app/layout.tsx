@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Mulish } from "next/font/google";
 import "./globals.css";
-import { FilterProvider } from "./context/FilterContext";
 import { Header } from "@molecules/Header";
 
 const mulish = Mulish({
@@ -26,14 +25,12 @@ export default function RootLayout({
       <body
         className={`${mulish.variable} font-mulish antialiased `}
       >
-        <FilterProvider>
-          <div className="flex flex-col 2xl:max-w-[1980px] mx-auto">
-            <Header />
-            <main className="mx-auto flex justify-center size-full items-center lg:max-w-[1095px] lg:flex-row">
-              {children}
-            </main>
-          </div>
-        </FilterProvider>
+        <div className="flex flex-col 2xl:max-w-[1980px] mx-auto">
+          <Header />
+          <main className="mx-auto flex justify-center size-full items-center lg:max-w-[1095px] lg:flex-row">
+            {children}
+          </main>
+        </div>
       </body>
     </html >
   );

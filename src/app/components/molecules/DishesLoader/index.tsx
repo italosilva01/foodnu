@@ -1,15 +1,16 @@
 "use client"
 import { use, useEffect, useState } from "react";
-import { useFilter } from "@/app/context/FilterContext";
 import { DishCardGrid } from "@organisms/DishCardGrid";
 import { getFilteredFoods } from "@/app/services/api";
+import { useFilters } from "@/store/useFilterStore";
 
-export const DishesLoader = () => {
-    const { filteredDishes, filters } = useFilter();
+export const DishesLoader = ({ dishesPromise }: { dishesPromise: Promise<PaginatedResponse<Food>> }) => {
+    const filters = useFilters();
+
     const [page, setPage] = useState(1)
     const [hasMore, setHasMore] = useState(true)
     const [isLoading, setIsLoading] = useState(false)
-    const response = use(filteredDishes);
+    const response = use(dishesPromise);
     const [dishes, setDishes] = useState(response.data)
 
     const resetInitialState = () => {
@@ -24,7 +25,7 @@ export const DishesLoader = () => {
             const response = await getFilteredFoods(filters, nextPage);
             setDishes((oldState) => [...oldState, ...response.data])
             setPage(nextPage);
-            setHasMore(!((dishes.length + response.data.length) >= response.pagination.totalItems));
+            //setHasMore(!((dishes.length + response.data.length) >= response.pagination.totalItems));
 
         } finally {
             setIsLoading(false);
@@ -34,12 +35,9 @@ export const DishesLoader = () => {
     useEffect(() => {
         setPage(1);
         setDishes(response.data);
-
     }, [response]);
 
-    useEffect(() => {
-        resetInitialState();
-    }, [filteredDishes])
+
 
     return <div className="flex flex-col w-full !mx-auto ">
         <DishCardGrid dishes={dishes} onLoadMore={handleLoadMore} isLoading={isLoading} hasMore={hasMore} />

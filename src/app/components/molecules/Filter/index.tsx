@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { CheckboxOption } from "../../atoms/CheckboxOption";
 import { CATEGORY_FILTERS_OPTIONS, TAG_FILTERS_OPTIONS } from "@utils/constants/filters";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { useFilter } from "@/app/context/FilterContext";
+import { useFilters, useFiltersActions } from "@store/useFilterStore";
 
 
 interface FilterFormData {
@@ -16,9 +16,11 @@ interface FilterFormData {
 
 const FilterBody = () => {
     const { register, handleSubmit, setValue, reset } = useForm<FilterFormData>();
-    const { setFilters, filters } = useFilter();
+    const { setFilters, clearFilters } = useFiltersActions();
+    const filters = useFilters();
 
     useEffect(() => {
+        console.log("filters", filters);
         filters.forEach(filter => {
             setValue(filter, true);
         });
@@ -30,7 +32,7 @@ const FilterBody = () => {
     }
     const handleClearFilters = () => {
         reset();
-        setFilters([]);
+        clearFilters();
     };
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
