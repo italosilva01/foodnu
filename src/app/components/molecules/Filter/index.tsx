@@ -21,7 +21,7 @@ const FilterBody = () => {
 
     useEffect(() => {
         console.log("filters", filters);
-        filters.forEach(filter => {
+        filters.forEach((filter: string) => {
             setValue(filter, true);
         });
     }, [filters, setValue]);
@@ -73,10 +73,11 @@ const FilterBody = () => {
 
 export const Filter = () => {
     const [isOpen, setIsOpen] = useState(false);
+
     return (
         <Popover open={isOpen} onOpenChange={setIsOpen} >
             <PopoverTrigger asChild>
-                <Button>
+                <Button onClick={() => console.log("click")}>
                     <FilterIcon />
                 </Button>
             </PopoverTrigger>

@@ -1,3 +1,4 @@
+"use client"
 import { useEffect, useRef } from "react";
 
 export const useInfiniteScroll = ({ hasMore, isLoading, onLoadMore }: { hasMore: boolean, isLoading: boolean, onLoadMore: () => void }) => {
