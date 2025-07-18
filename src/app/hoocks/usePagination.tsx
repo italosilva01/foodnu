@@ -22,8 +22,10 @@ export const usePagination = () => {
     };
 
     const initialDishes = async () => {
+        setIsLoading(true)
         const response = await getFilteredFoods([], page)
         setDishes(response.data)
+        setIsLoading(false)
     }
     useEffect(() => {
         initialDishes()
