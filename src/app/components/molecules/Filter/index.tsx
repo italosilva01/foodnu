@@ -1,12 +1,10 @@
 'use client'
 
-import { FilterIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { CheckboxOption } from "../../atoms/CheckboxOption";
 import { CATEGORY_FILTERS_OPTIONS, TAG_FILTERS_OPTIONS } from "@utils/constants/filters";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useFilters, useFiltersActions } from "@store/useFilterStore";
 
 
@@ -14,7 +12,7 @@ interface FilterFormData {
     [key: string]: boolean;
 }
 
-const FilterBody = () => {
+export const Filter = () => {
     const { register, handleSubmit, setValue, reset } = useForm<FilterFormData>();
     const { setFilters, clearFilters } = useFiltersActions();
     const filters = useFilters();
@@ -34,7 +32,7 @@ const FilterBody = () => {
         clearFilters();
     };
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 p-4 w-fit">
             <h1 className="text-2xl font-bold">Filtros</h1>
             {filters.length > 0 && (
                 <Button
@@ -70,20 +68,4 @@ const FilterBody = () => {
     )
 }
 
-export const Filter = () => {
-    const [isOpen, setIsOpen] = useState(false);
-
-    return (
-        <Popover open={isOpen} onOpenChange={setIsOpen} >
-            <PopoverTrigger asChild>
-                <Button onClick={() => console.log("click")}>
-                    <FilterIcon />
-                </Button>
-            </PopoverTrigger>
-            <PopoverContent>
-                <FilterBody />
-            </PopoverContent>
-        </Popover>
-    )
-}
 
