@@ -1,5 +1,4 @@
 
-import { Filter } from "@molecules/Filter";
 import { DishesLoader } from "./components/molecules/DishesLoader";
 
 export default function Home() {
