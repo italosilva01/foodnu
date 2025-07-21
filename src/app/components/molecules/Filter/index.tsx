@@ -20,7 +20,6 @@ const FilterBody = () => {
     const filters = useFilters();
 
     useEffect(() => {
-        console.log("filters", filters);
         filters.forEach((filter: string) => {
             setValue(filter, true);
         });

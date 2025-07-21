@@ -1,13 +1,10 @@
 "use client"
 import { DishCardGrid } from "@organisms/DishCardGrid";
-import { usePagination } from "@/app/hoocks/usePagination";
-import { useEffect } from "react";
+import { usePagination } from "@/app/hooks/usePagination";
 
 export const DishesLoader = () => {
     const { dishes, handleLoadMore, isLoading } = usePagination()
-    useEffect(() => {
-        console.log("isLoading", isLoading)
-    }, [isLoading])
+
     if (
         isLoading
     ) {

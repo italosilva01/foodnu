@@ -4,7 +4,7 @@ import { formatCurrency } from "@/app/utils/functions"
 import { AddToCartButton } from "@/app/components/atoms/ButtonAddToCartButton"
 import { Food } from "@/app/services/api"
 import { motion } from "motion/react"
-import { useMobile } from "@/app/hoocks/useMobile"
+import { useMobile } from "@/app/hooks/useMobile"
 import { SimilarDishes } from "@molecules/SimilarDishes"
 
 interface DishDetailsProps {

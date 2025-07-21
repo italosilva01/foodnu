@@ -7,7 +7,6 @@ import { Tag } from "@atoms/Tag";
 import { useRouter } from "next/navigation";
 
 interface DishCardProps {
-
     id: string
     dataDish: {
         image: string;

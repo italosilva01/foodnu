@@ -1,7 +1,7 @@
 "use client"
 import { DishCard } from "@molecules/DishCard";
 import { Food } from "@services/api";
-import { useInfiniteScroll } from "@/app/hoocks/useinfinityScrol";
+import { useInfiniteScroll } from "@/app/hooks/useinfinityScrol";
 
 interface DishCardGridProps {
     dishes: Food[];

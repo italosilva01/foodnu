@@ -1,6 +1,6 @@
 'use client'
 
-import { useMobile } from "@/app/hoocks/useMobile"
+import { useMobile } from "@/app/hooks/useMobile"
 
 export const SkeletonDishDetail = () => {
     const isMobileScreen = useMobile()

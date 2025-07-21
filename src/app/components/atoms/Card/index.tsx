@@ -24,7 +24,6 @@ const CardRoot = ({ children, className, onClick }: CardRootProps) => {
     const handleClick = (e: React.MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
-        console.log("Card clicked");
         onClick();
     };
 
