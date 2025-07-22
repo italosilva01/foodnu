@@ -30,9 +30,8 @@ export default function RootLayout({
           <Header />
           <main className="">
             <div className="flex flex-col w-full 2xl:!max-w-[1920px] lg:flex-row">
-              <div className="hidden lg:block">
-                <Filter />
-              </div>
+
+              <Filter />
               <div className="w-full">
                 {children}
               </div>
