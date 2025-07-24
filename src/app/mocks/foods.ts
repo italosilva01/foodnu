@@ -69,7 +69,7 @@ export default [
     "description": "Generoso burrito recheado com carne temperada (ou opção vegetariana), arroz, feijão, queijo, salsa fresca e um toque de sour cream.",
     "price": 30.50,
     "image": "/foods/burrito.svg",
-    "category": "main courses",
+    "category": "mexican",
     "tags": ["mexican", "burrito", "meat", "beans", "rice"]
   },
   {
@@ -141,7 +141,97 @@ export default [
     "description": "Saboroso kebab de cordeiro marinado em especiarias do oriente médio, grelhado e enrolado em pão folha sírio com homus, tabule fresco e molho de tahine.",
     "price": 33.70,
     "image": "/foods/burrito.svg",
-    "category": "main courses",
+    "category": "light meals",
     "tags": ["kebab", "lamb", "middle eastern", "pita bread", "hummus", "tahini"]
+  },
+  {
+    "id": "17",
+    "name": "Espetinho (Carne ou frango)",
+    "description": "Acompanha farofa e vinagrete. (Verificar disponibilidade)",
+    "price": 12.00,
+    "image": "/foods/espetinho.svg",
+    "category": "appetizers",
+    "tags": ["skewer", "barbecue", "meat", "chicken", "farofa", "vinaigrette"]
+  },
+  {
+    "id": "18",
+    "name": "Queijo de coalho (meia porção)",
+    "description": "2 fatias de queijo de coalho assado. Acompanha mel de engenho.",
+    "price": 16.00,
+    "image": "/foods/queijo-coalho.svg",
+    "category": "appetizers",
+    "tags": ["rennet cheese", "cheese", "grilled", "honey", "appetizer"]
+  },
+  {
+    "id": "19",
+    "name": "Queijo de coalho 300g",
+    "description": "4 fatias de queijo de coalho assado. Acompanha mel de engenho.",
+    "price": 32.00,
+    "image": "/foods/queijo-coalho.svg",
+    "category": "appetizers",
+    "tags": ["rennet cheese", "cheese", "grilled", "honey", "appetizer", "full portion"]
+  },
+  {
+    "id": "20",
+    "name": "Antepasto de berinjela (meia porção)",
+    "description": "Refogado de berinjela com pimentões, azeitonas, uva-passa embebido no azeite. Acompanha torradinhas.",
+    "price": 15.00,
+    "image": "/foods/antepasto-berinjela.svg",
+    "category": "appetizers",
+    "tags": ["antipasto", "eggplant", "toasts", "vegetarian", "starter"]
+  },
+  {
+    "id": "21",
+    "name": "Antepasto de berinjela",
+    "description": "Refogado de berinjela com pimentões, azeitonas, uva-passa embebido no azeite. Acompanha torradinhas.",
+    "price": 30.00,
+    "image": "/foods/antepasto-berinjela.svg",
+    "category": "appetizers",
+    "tags": ["antipasto", "eggplant", "toasts", "vegetarian", "starter", "full portion"]
+  },
+  {
+    "id": "22",
+    "name": "Escondidinho de carne de sol",
+    "description": "Purê de macaxeira, carne de sol, nata e queijo de coalho maçaricado.",
+    "price": 35.00,
+    "image": "/foods/escondidinho-carne-sol.svg",
+    "category": "appetizers",
+    "tags": ["escondidinho", "sun-dried meat", "cassava", "northeastern", "rennet cheese"]
+  },
+  {
+    "id": "23",
+    "name": "Tábua de frios",
+    "description": "70g castanha caju, 70g amendoim, 70g azeitona, 70g queijo do reino, 70g salame, 150g mussarela.",
+    "price": 70.00,
+    "image": "/foods/tabua-frios.svg",
+    "category": "appetizers",
+    "tags": ["charcuterie board", "cheeses", "salami", "cured meats", "snack"]
+  },
+  {
+    "id": "24",
+    "name": "Caldo verde",
+    "description": "Creme de Batata, couve e rodelas de calabresa. Acompanha torradinhas.",
+    "price": 25.00,
+    "image": "/foods/caldo-verde.svg",
+    "category": "soups",
+    "tags": ["broth", "soup", "green soup", "potato", "collard greens", "pepperoni"]
+  },
+  {
+    "id": "25",
+    "name": "Moela na cerveja preta",
+    "description": "Moela de frango cozida lentamente em molho de cerveja preta e temperos. Acompanha farofa caseira.",
+    "price": 28.00,
+    "image": "/foods/moela-cerveja-preta.svg",
+    "category": "soups",
+    "tags": ["gizzard", "appetizer", "dark beer", "farofa"]
+  },
+  {
+    "id": "26",
+    "name": "Caldo nordestino",
+    "description": "Caldo cremoso de macaxeira, carne de sol desfiada e queijo de coalho. Acompanha torradinhas.",
+    "price": 30.00,
+    "image": "/foods/caldo-nordestino.png",
+    "category": "soups",
+    "tags": ["broth", "soup", "northeastern", "cassava", "sun-dried meat", "rennet cheese"]
   }
 ];

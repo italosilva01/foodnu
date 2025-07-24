@@ -160,14 +160,58 @@ export const TAG_FILTERS_OPTIONS = [
     ];
 export const CATEGORY_FILTERS_OPTIONS = [
     {
-        name: "with-meat",
-        label: "Com Carne",
+        name: "breakfast",
+        label: "Café da Manhã",
         type: "checkbox"
     },
     {
-        name: "with-fish",
-        label: "Com Peixe",
+        name: "vegan",
+        label: "Vegano",
         type: "checkbox"
     },  
-    
+    {
+        name: "desserts",
+        label: "Sobremesa",
+        type: "checkbox"
+    },
+    {
+        name: "lunch",
+        label: "Almoço",
+        type: "checkbox"
+    },
+    {
+        name: "dinner",
+        label: "Jantar",
+        type: "checkbox"
+    },
+    {
+        name: "sandwiches",
+        label: "Sanduíches",
+        type: "checkbox"
+    },
+    {
+        name: "salads",
+        label: "Saladas",
+        type: "checkbox"
+    },
+    {
+        name: "mexican",
+        label: "Mexicano",
+    },
+    {
+        name: "light meals",
+        label: "Refeições Leve",
+        type: "checkbox"
+    },
+    {
+        name: "brunch",
+        label: "Brunch",
+        type: "checkbox"
+    },
+    {
+        name: "soups",
+        label: "Sopas",
+        type: "checkbox"
+    },
+   
 ]

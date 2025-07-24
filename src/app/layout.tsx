@@ -29,10 +29,9 @@ export default function RootLayout({
         <div className="flex flex-col mx-auto">
           <Header />
           <main className="">
-            <div className="flex flex-col w-full 2xl:!max-w-[1920px] lg:flex-row">
-
+            <div className="flex flex-col w-full 2xl:!max-w-[1920px] lg:flex-row mx-auto gap-3">
               <Filter />
-              <div className="w-full">
+              <div className="w-full lg:mx-auto">
                 {children}
               </div>
             </div>

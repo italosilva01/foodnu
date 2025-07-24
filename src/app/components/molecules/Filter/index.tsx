@@ -32,9 +32,8 @@ export const Filter = () => {
         clearFilters();
     };
     return (
-        <aside className="hidden lg:block">
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 p-4 w-fit">
-                <h1 className="text-2xl font-bold">Filtros</h1>
+        <aside className="hidden lg:block w-full lg:min-w-[300px] lg:w-[300px] lg:!max-h-[calc(100vh-100px)] sticky bottom-0 overflow-y-auto">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 p-4 w-full ml-auto">
                 {filters.length > 0 && (
                     <Button
                         type="button"
@@ -45,25 +44,27 @@ export const Filter = () => {
                         Limpar
                     </Button>
                 )}
-                <div className="grid grid-cols-2 gap-4">
-                    <div className="">
-                        <h2 className="text-lg font-bold !mb-3">Tags</h2>
-                        <div className="flex flex-col gap-2 overflow-y-auto h-56">
-                            {TAG_FILTERS_OPTIONS.map((item, index) => (
-                                <CheckboxOption key={index} register={register} item={item} />
-                            ))}
-                        </div>
-                    </div>
-                    <div>
-                        <h2 className="text-lg font-bold !mb-3">Categorias</h2>
-                        <div className="overflow-y-auto lg:h-56">
+                <div className="flex flex-col gap-2 ">
+                    <h2 className="text-lg font-bold">Categorias</h2>
+                    <div className="overflow-y-auto lg:!max-h-32">
 
-                            {CATEGORY_FILTERS_OPTIONS.map((item, index) => (
-                                <CheckboxOption key={index} register={register} item={item} />
-                            ))}
-                        </div>
+                        {CATEGORY_FILTERS_OPTIONS.map((item, index) => (
+                            <CheckboxOption key={index} register={register} item={item} />
+                        ))}
+                    </div>
+                    <h2 className="text-lg font-bold">Tags</h2>
+                    <div className="flex flex-col gap-2 overflow-y-auto lg:!max-h-32">
+                        {TAG_FILTERS_OPTIONS.map((item, index) => (
+                            <CheckboxOption key={index} register={register} item={item} />
+                        ))}
                     </div>
                 </div>
+
+                <div className="">
+
+                </div>
+
+
                 <Button type="submit" className="w-full mt-4">Aplicar</Button>
             </form>
         </aside>
