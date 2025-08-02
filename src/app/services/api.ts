@@ -76,14 +76,17 @@ export const getLimitedFoods = async (limit: number = 6): Promise<Food[]> => {
 };
 
 export const getFilteredFoods = async (
-  filters: string[],
+  filter: string,
   page: number = 1,
   limit: number = LIMIT_PER_PAGE
 ): Promise<PaginatedResponse<Food>> => {
   await fakeDelay();
   
   const filteredFoods = foodsData.filter(food => 
-    filters.every(filter => food.tags.includes(filter))
+    // TODO: Implementar filtro por tags
+    // TODO: Implementar filtro por categoria
+    // Fazer com strategy
+    food.tags.includes(filter)
   );
   
   const startIndex = (page - 1) * limit;

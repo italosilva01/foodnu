@@ -1,12 +1,12 @@
 import { create } from "zustand";
 
  type State = {
-   filters: string[]
+   filter: string
  }
 
  type Actions = {
-    setFilters: (filters: string[]) => void;
-    clearFilters: () => void;
+    setFilter: (filter: string) => void;
+    clearFilter: () => void;
  }
 
  type FilterStore = {
@@ -16,14 +16,14 @@ import { create } from "zustand";
 
  const useFilterStore = create<FilterStore>((set) => ({
     state: {
-        filters: [],
+        filter: '',
     },
     actions: {
-        setFilters: (filters: string[]) => set({ state: { filters: [...filters] } }),
-        clearFilters: () => set({ state: { filters: [] } })
+        setFilter: (filter: string) => set({ state: { filter } }),
+        clearFilter: () => set({ state: { filter: '' } })
     },
  }))
 
  
-export const useFilters = ()=> useFilterStore((state)=>state.state.filters)
-export const useFiltersActions = ()=>useFilterStore((state)=>state.actions)
+export const useFilter = ()=> useFilterStore((state)=>state.state.filter)
+export const useFilterActions = ()=>useFilterStore((state)=>state.actions)
