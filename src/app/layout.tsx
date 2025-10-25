@@ -24,20 +24,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body
-        className={`${mulish.variable} font-mulish antialiased `}
-      >
+      <body className={`${mulish.variable} font-mulish antialiased `}>
         <Header />
         <main className="">
-          <div className="flex flex-col w-full 2xl:!max-w-[1920px] lg:flex-row mx-auto gap-3">
+          <div className="flex flex-col w-full 2xl:!max-w-[1920px] lg:flex-row mx-auto gap-3 !border-green-500">
             <Filter />
-            <div className="w-full lg:mx-auto">
-              {children}
-            </div>
+            <div className="w-full lg:mx-auto !border-blue-500">{children}</div>
           </div>
         </main>
         <Footer />
       </body>
-    </html >
+    </html>
   );
 }
