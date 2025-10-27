@@ -2,8 +2,7 @@
 
 import { Card } from "@/app/components/atoms/Card";
 import { formatCurrency } from "@/app/utils/functions";
-import { Category } from "@atoms/Category";
-import { Tag } from "@atoms/Tag";
+import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 
 interface DishCardProps {
@@ -17,29 +16,36 @@ interface DishCardProps {
     }
 
 }
-
+const ButtonAddToCar = () => {
+    return (
+        <Button >
+            <
+        </Button>
+    )
+}
 export const DishCard = ({ dataDish, id }: DishCardProps) => {
     const router = useRouter()
-    const { image, title, price, tag, category } = dataDish;
+    const { image, title, price } = dataDish;
 
     const handleClick = () => {
         router.push(`dishes/${id}`)
     }
 
     return (
-        <Card.Root onClick={handleClick} className=" max-w-[14rem] max-h-[20.6875rem]">
-            <Card.Content>
+        <Card.Root onClick={handleClick} className=" max-w-[7.625rem]">
+            <Card.Content className="">
                 <div className="relative h-fit border-1 border-rose-50">
-                    <Card.Image image={image} />
-                    <div className="absolute bottom-0 left-0 flex gap-2 !py-2 pl-2">
-                        <Category category={category} />
-                        <Tag tag={tag} />
-                    </div>
+                    <Card.Image image={image} width={122} height={61} />
                 </div>
-                <Card.Title title={title} className="text-center mt-2 max-h-[1.75rem] truncate" />
-                <p className="text-center text-sm text-gray-500">
+                <p className="text-lg text-black">
                     {formatCurrency(price)}
                 </p>
+                <p className="text-xs text-black">
+                    Para duas pessoas
+                </p>
+
+                <Card.Title title={title} className="!text-base whitespace-break-spaces truncate" />
+
             </Card.Content>
         </Card.Root>
     )

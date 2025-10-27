@@ -31,7 +31,7 @@ export const DishCardGrid: React.FC<DishCardGridProps> = ({
   }
   return (
     <div className="w-full">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 w-fit max-w-[1095px] lg:min-w-full mx-auto p-4">
+      <div className="grid grid-cols-1 md:flex md:flex-wrap gap-4 w-fit max-w-[1095px] lg:min-w-full mx-auto p-4">
         {dishes.map(({ id, name, image, price, tags, category }) => {
           const firstTag = tags?.[0] || "";
           const firstCategory = category || "";

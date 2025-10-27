@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import Image, { ImageProps } from "next/image";
 
 interface CardRootProps {
@@ -29,7 +30,7 @@ const CardRoot = ({ children, className, onClick }: CardRootProps) => {
 
     return (
         <div
-            className={`bg-white rounded-lg overflow-hidden cursor-pointer w-fit h-fit hover:shadow-md transition-shadow duration-300 select-none ${className}`}
+            className={`bg-white rounded-lg overflow-hidden cursor-pointer w-fit h-fit ${className}`}
             onClick={handleClick}
             role="button"
             tabIndex={0}
@@ -59,6 +60,7 @@ const CardImage = ({ image, className, width = 224, height = 275, ...props }: Ca
     );
 };
 
+
 const CardContent = ({ children, className }: CardContentProps) => {
     return (
         <div className={`pointer-events-none ${className}`}>
@@ -69,7 +71,7 @@ const CardContent = ({ children, className }: CardContentProps) => {
 
 const CardTitle = ({ title, className }: CardTitleProps) => {
     return (
-        <h2 className={`text-xl font-semibold mx-auto pointer-events-none ${className}`}>
+        <h2 className={cn("text-xl font-semibold mx-auto pointer-events-none", className)}>
             {title}
         </h2>
     );
