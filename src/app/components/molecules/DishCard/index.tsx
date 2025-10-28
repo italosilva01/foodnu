@@ -19,10 +19,11 @@ interface DishCardProps {
 }
 const ButtonAddToCar = () => {
     return (
-        <Button className="bg-white rounded-full w-10 h-10 z-50 hover" onClick={(e) => {
+        <Button className="bg-white group rounded-full w-10 h-10 z-50 hover pointer-events-auto" onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            console.log('Clicou no botão');
+            console.log('Adicionar ao carrinho');
+            // TODO: Adicionar ao carrinho
         }} >
             <PlusIcon className="group-hover:text-red-500 text-gray-500" />
         </Button>
@@ -32,23 +33,17 @@ export const DishCard = ({ dataDish, id }: DishCardProps) => {
     const router = useRouter()
     const { image, title, price } = dataDish;
 
-    const handleClick = (e: React.MouseEvent) => {
-        console.log('Clicou no card');
-        // router.push(`dishes/${id}`)
-        e.stopPropagation();
-        e.preventDefault();
+    const handleClick = () => {
+       router.push(`dishes/${id}`)
     }
 
     return (
-        <Card.Root onClick={(e) => handleClick(e)} className=" max-w-[7.625rem]">
+        <Card.Root onClick={handleClick} className=" max-w-[7.625rem]">
             <Card.Content className="">
-                <div className="relative h-fit border-1 border-rose-50">
+                <div className="relative h-fit border-1 border-rose-50 pointer-events-none">
                     <Card.Image image={image} width={122} height={61} />
-                    <div className="absolute bottom-[5px] right-[5px]">
-                        <div className="relative z-50 " onClick={e => {
-                            // Impede que o click do Card.Root dispare
-                            e.stopPropagation();
-                        }} >
+                    <div className="absolute bottom-[5px] right-[5px] pointer-events-auto">
+                        <div className="relative z-50" >
                             <ButtonAddToCar />
                         </div>
                     </div>
