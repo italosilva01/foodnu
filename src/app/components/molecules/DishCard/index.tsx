@@ -3,18 +3,25 @@
 import { Card } from "@/app/components/atoms/Card";
 import { formatCurrency } from "@/app/utils/functions";
 import { useRouter } from "next/navigation";
-import { ButtonMinAddToCar } from "../../atoms/ButtonMinAddToCar";
+import { ButtonMinAddToCar } from "@atoms/ButtonMinAddToCar";
 import { useMobile } from "@/app/hooks/useMobile";
-import { Dish } from "@/types/types";
+
+interface Dish {
+    image: string;
+    title: string;
+    price: number;
+    id: string;
+}
 
 interface DishItemProps {
-    id: string
-    handleClick: () => void
+    handleClick: () => void;
     dataDish: Dish
 
 }
+
+
 const DishItemDesktop = ({ dataDish, handleClick }: DishItemProps) => {
-    const { image, name, price } = dataDish;
+    const { image, title, price } = dataDish;
     return (
         <Card.Root onClick={handleClick} className=" max-w-[7.625rem]">
         <Card.Content className="">
@@ -33,14 +40,15 @@ const DishItemDesktop = ({ dataDish, handleClick }: DishItemProps) => {
                 Para duas pessoas
             </p>
 
-            <Card.Title title={name} className="!text-base whitespace-break-spaces truncate" />
+            <Card.Title title={title} className="!text-base whitespace-break-spaces truncate" />
 
         </Card.Content>
     </Card.Root>
     )
 }
 const DishItemMobile = ({ dataDish, handleClick }: DishItemProps) => {
-        const { image, name, price } = dataDish;
+        const { image, title    , price } = dataDish;
+        console.log(dataDish);
     return (
         <Card.Root onClick={handleClick} className=" max-w-[7.625rem]">
         <Card.Content className="">
@@ -59,22 +67,15 @@ const DishItemMobile = ({ dataDish, handleClick }: DishItemProps) => {
                 Para duas pessoas
             </p>
 
-            <Card.Title title={name} className="!text-base whitespace-break-spaces truncate" />
+            <Card.Title title={title} className="!text-base whitespace-break-spaces truncate" />
 
         </Card.Content>
     </Card.Root>
     )
 }
 
-export const DishCard = () => {
+export const DishCard = ({ dataDish, }: DishItemProps) => {
     const router = useRouter()
     const isMobile = useMobile()
-
-    const handleClick = () => {
-       router.push(`dishes/${id}`)
-    }
-
-    return (
-      isMobile ? <DishItemDesktop dataDish={dataDish} id={id} handleClick={handleClick} /> : <DishItemMobile dataDish={dataDish} id={id} handleClick={handleClick} />
-    )
+    return !isMobile ? <DishItemDesktop dataDish={dataDish} handleClick={() => router.push(`dishes/${dataDish.id}`)} /> : <DishItemMobile dataDish={dataDish} handleClick={() => router.push(`dishes/${dataDish.id}`)} />
 }
