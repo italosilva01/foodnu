@@ -1,38 +1,31 @@
-"use client"
-import { useFilter } from "@/app/context/FilterContext";
-import { DishCardGrid } from "../../organisms/DishCardGrid";
-import { use, useEffect, useState } from "react";
-import { getFilteredFoods } from "@/app/services/api";
+"use client";
+import { use } from "react";
+import { DishCardGrid } from "@organisms/DishCardGrid";
+import { usePagination } from "@/app/hooks/usePagination";
+import { Food, PaginatedResponse } from "@/app/services/api";
+import { useFilter } from "@/store/useFilterStore";
+import { Loading } from "@atoms/Loading";
 
-export const DishesLoader = () => {
-    const { filteredDishes, filters } = useFilter();
-    const [page, setPage] = useState(1)
-    const [hasMore, setHasMore] = useState(true)
-    const [isLoading, setIsLoading] = useState(false)
-    const response = use(filteredDishes);
-    const [dishes, setDishes] = useState(response.data)
+export const DishesLoader = ({
+  initialDishesPromise,
+}: {
+  initialDishesPromise: Promise<PaginatedResponse<Food>>;
+}) => {
+  const { dishes, handleLoadMore, isLoading } = usePagination();
+  const filter = useFilter();
+  const initialDishes = use(initialDishesPromise);
+  if (isLoading) {
+    return <Loading />;
+  }
 
-    const handleLoadMore = async () => {
-        setIsLoading(true);
-        try {
-            const nextPage = page + 1;
-            const response = await getFilteredFoods(filters, nextPage);
-            setDishes((oldState) => [...oldState, ...response.data])
-            setPage(nextPage);
-            setHasMore(dishes.length > response.pagination.totalItems);
-
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-
-    useEffect(() => {
-        setDishes(response.data);
-    }, [response]);
-
-    return <div className="flex flex-col w-full !mx-auto ">
-
-        <DishCardGrid dishes={dishes} onLoadMore={handleLoadMore} isLoading={isLoading} hasMore={hasMore} />
+  return (
+    <div className="flex flex-col w-full !mx-auto">
+      <DishCardGrid
+        dishes={filter === "" ? initialDishes.data : dishes}
+        onLoadMore={handleLoadMore}
+        isLoading={isLoading}
+        hasMore={false}
+      />
     </div>
-}
+  );
+};

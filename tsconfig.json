@@ -25,7 +25,9 @@
       "@organisms/*": ["./src/app/components/organisms/*"],
       "@types/*": ["./src/app/types/*"],
       "@utils/*": ["./src/app/utils/*"],
-      "@services/*": ["./src/app/services/*"]
+      "@services/*": ["./src/app/services/*"],
+      "@context/*": ["./src/app/context/*"],
+      "@store/*": ["./src/store/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

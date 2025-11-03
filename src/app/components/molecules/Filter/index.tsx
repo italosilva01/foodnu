@@ -1,84 +1,47 @@
-'use client'
+"use client";
 
-import { FilterIcon } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { CheckboxOption } from "../../atoms/CheckboxOption";
-import { CATEGORY_FILTERS_OPTIONS, TAG_FILTERS_OPTIONS } from "@utils/constants/filters";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { useFilter } from "@/app/context/FilterContext";
-
-
-interface FilterFormData {
-    [key: string]: boolean;
-}
-
-const FilterBody = () => {
-    const { register, handleSubmit, setValue, reset } = useForm<FilterFormData>();
-    const { setFilters, filters } = useFilter();
-
-    useEffect(() => {
-        filters.forEach(filter => {
-            setValue(filter, true);
-        });
-    }, [filters]);
-
-    const onSubmit = async (data: FilterFormData) => {
-        const payload = Object.keys(data).filter(key => data[key] !== false);
-        setFilters(payload);
-    }
-    const handleClearFilters = () => {
-        reset();
-        setFilters([]);
-    };
-    return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <h1 className="text-2xl font-bold">Filtros</h1>
-            {filters.length > 0 && (
-                <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    onClick={handleClearFilters}
-                >
-                    Limpar
-                </Button>
-            )}
-            <div className="grid grid-cols-2 gap-4">
-                <div className="">
-                    <h2 className="text-lg font-bold !mb-3">Tags</h2>
-                    <div className="flex flex-col gap-2 h-96 overflow-y-auto">
-                        {TAG_FILTERS_OPTIONS.map((item, index) => (
-                            <CheckboxOption key={index} register={register} item={item} />
-                        ))}
-                    </div>
-                </div>
-                <div>
-                    <h2 className="text-lg font-bold !mb-3">Categorias</h2>
-                    {CATEGORY_FILTERS_OPTIONS.map((item, index) => (
-                        <CheckboxOption key={index} register={register} item={item} />
-                    ))}
-                </div>
-            </div>
-            <Button type="submit" className="w-full mt-4">Aplicar</Button>
-        </form>
-    )
-}
+import {
+  CATEGORY_FILTERS_OPTIONS,
+  TAG_FILTERS_OPTIONS,
+} from "@utils/constants/filters";
+import { useFilterActions } from "@store/useFilterStore";
+import { ItemMenu } from "@atoms/ItemMenu";
 
 export const Filter = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    return (
-        <Popover open={isOpen} onOpenChange={setIsOpen} >
-            <PopoverTrigger asChild>
-                <Button>
-                    <FilterIcon />
-                </Button>
-            </PopoverTrigger>
-            <PopoverContent>
-                <FilterBody />
-            </PopoverContent>
-        </Popover>
-    )
-}
+  const { setFilter } = useFilterActions();
 
+  const handleFilter = (filter: string) => {
+    setFilter(filter);
+  };
+
+  return (
+    <aside className="hidden lg:block w-full lg:min-w-[300px] lg:w-[300px]  sticky bottom-0 overflow-y-auto">
+      <div className="flex flex-col gap-4 p-4 w-full ml-auto">
+        <div className="flex flex-col gap-2">
+          <h2 className="text-lg font-bold sticky top-0 bg-white">
+            Categorias
+          </h2>
+          <div className="overflow-y-auto">
+            {CATEGORY_FILTERS_OPTIONS.map((item, index) => (
+              <ItemMenu
+                key={index}
+                item={item}
+                onClick={() => handleFilter(item.name)}
+              />
+            ))}
+          </div>
+          <h2 className="text-lg font-bold sticky top-0 bg-white">Tags</h2>
+          <div className="overflow-y-auto">
+            {TAG_FILTERS_OPTIONS.map((item, index) => (
+              <ItemMenu
+                key={index}
+                item={item}
+                onClick={() => handleFilter(item.name)}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </aside>
+  );
+};

@@ -1,42 +1,81 @@
 'use client';
 
 import { Card } from "@/app/components/atoms/Card";
-import { Category } from "@atoms/Category";
-import { Tag } from "@atoms/Tag";
+import { formatCurrency } from "@/app/utils/functions";
+import { useRouter } from "next/navigation";
+import { ButtonMinAddToCar } from "@atoms/ButtonMinAddToCar";
+import { useMobile } from "@/app/hooks/useMobile";
 
-interface DishCardProps {
+interface Dish {
     image: string;
     title: string;
     price: number;
-    tag: string;
-    category: string;
+    id: string;
+}
+
+interface DishItemProps {
+    handleClick: () => void;
+    dataDish: Dish
 
 }
 
-export const DishCard = ({ image, title, price, tag, category }: DishCardProps) => {
 
-    const handleClick = () => {
-        console.log("teste")
-    }
-
+const DishItemDesktop = ({ dataDish, handleClick }: DishItemProps) => {
+    const { image, title, price } = dataDish;
     return (
-        <Card.Root onClick={handleClick} className=" max-w-[14rem] max-h-[20.6875rem]">
-            <Card.Content>
-                <div className="relative h-fit border-1 border-rose-50">
-                    <Card.Image image={image} />
-                    <div className="absolute bottom-0 left-0 flex gap-2 !py-2 pl-2">
-                        <Category category={category} />
-                        <Tag tag={tag} />
+        <Card.Root onClick={handleClick} className=" max-w-[7.625rem]">
+        <Card.Content className="">
+            <div className="relative h-fit border-1 border-rose-50 pointer-events-none">
+                <Card.Image image={image} width={122} height={61} />
+                <div className="absolute bottom-[5px] right-[5px] pointer-events-auto">
+                    <div className="relative z-50" >
+                        <ButtonMinAddToCar />
                     </div>
                 </div>
-                <Card.Title title={title} className="text-center mt-2 max-h-[1.75rem] truncate" />
-                <p className="text-center text-sm text-gray-500">
-                    {new Intl.NumberFormat('pt-BR', {
-                        style: 'currency',
-                        currency: 'BRL'
-                    }).format(price)}
-                </p>
-            </Card.Content>
-        </Card.Root>
+            </div>
+            <p className="text-lg text-black">
+                {formatCurrency(price)}
+            </p>
+            <p className="text-xs text-black">
+                Para duas pessoas
+            </p>
+
+            <Card.Title title={title} className="!text-base whitespace-break-spaces truncate" />
+
+        </Card.Content>
+    </Card.Root>
     )
+}
+const DishItemMobile = ({ dataDish, handleClick }: DishItemProps) => {
+        const { image, title    , price } = dataDish;
+        console.log(dataDish);
+    return (
+        <Card.Root onClick={handleClick} className=" max-w-[7.625rem]">
+        <Card.Content className="">
+            <div className="relative h-fit border-1 border-rose-50 pointer-events-none">
+                <Card.Image image={image} width={122} height={61} />
+                <div className="absolute bottom-[5px] right-[5px] pointer-events-auto">
+                    <div className="relative z-50" >
+                        <ButtonMinAddToCar />
+                    </div>
+                </div>
+            </div>
+            <p className="text-lg text-black">
+                {formatCurrency(price)}
+            </p>
+            <p className="text-xs text-black">
+                Para duas pessoas
+            </p>
+
+            <Card.Title title={title} className="!text-base whitespace-break-spaces truncate" />
+
+        </Card.Content>
+    </Card.Root>
+    )
+}
+
+export const DishCard = ({ dataDish, }: DishItemProps) => {
+    const router = useRouter()
+    const isMobile = useMobile()
+    return !isMobile ? <DishItemDesktop dataDish={dataDish} handleClick={() => router.push(`dishes/${dataDish.id}`)} /> : <DishItemMobile dataDish={dataDish} handleClick={() => router.push(`dishes/${dataDish.id}`)} />
 }
