@@ -1,4 +1,4 @@
-import { cleanup, render, screen, } from '@testing-library/react'
+import { cleanup, createEvent, fireEvent, render, screen, } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { ButtonMinAddToCar } from './index'
 import '@testing-library/jest-dom'
@@ -15,16 +15,31 @@ describe('ButtonMinAddToCar', () => {
         expect(screen.getByRole('button')).toBeDefined()
     })
 
+    it('should stop event propagation on click', async () => {
+        const myEvent = createEvent.click(screen.getByRole('button'));
+
+        myEvent.preventDefault = jest.fn();
+        myEvent.stopPropagation = jest.fn();
+
+        fireEvent(screen.getByRole('button'), myEvent)
+
+        expect(myEvent.preventDefault).toHaveBeenCalled()
+        expect(myEvent.stopPropagation).toHaveBeenCalled()
+
+    })
+
     it('should render the plusIcon', () => {
-        const plusIcon = screen.getByRole('svg');
-        expect(plusIcon).toBeDefined()
+        const button = screen.getByRole('button')
+        expect(button.querySelector('svg')).toBeInTheDocument()
+    })
+
+    it('should be visible for users', () => {
+        expect(screen.getByRole('button')).toBeVisible()
     })
 
     it('should call the onClick function when the button is clicked', async () => {
         const user = userEvent.setup()
         const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => { })
-
-        render(<ButtonMinAddToCar />)
 
         const button = screen.getByRole('button')
         await user.click(button)

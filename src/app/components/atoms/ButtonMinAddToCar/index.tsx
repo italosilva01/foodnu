@@ -14,7 +14,7 @@ export const ButtonMinAddToCar = ({ ...props }: ButtonMinAddToCarProps) => {
             e.stopPropagation();
             console.log('Adicionar ao carrinho');
             // TODO: Adicionar ao carrinho
-        }} {...props}>
+        }} data-testid="plusIcon" {...props}>
             <PlusIcon className="group-hover:text-red-500 text-gray-500" />
         </Button>
     )
